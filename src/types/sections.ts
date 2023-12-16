@@ -26,6 +26,27 @@ export type RawSection = {
     border_radius: string 
 }
 
+export type Styles = {
+    color: string
+    width: string
+    height: string
+    fontSize: string 
+    marginTop: string
+    textAlign: string 
+    fontWeight: string 
+    fontFamily: string 
+    lineHeight: string 
+    borderRadius: string 
+}
+
+export type ProcessedSection = {
+    id: number
+    content: string
+    content_type: ContentType
+    image_url: string | null
+    styles: Styles
+}
+
 export type SectionInfo = {
     articleId: {
         article_id: string //Type of string due to the searchParams.append functionality 
