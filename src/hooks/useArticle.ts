@@ -13,7 +13,9 @@ export const useArticleData = ({ token }: UseArticleData) => {
     const { data, isPending, isLoading, isError, refetch } = useQuery({
         queryKey: ['article', 'data', token],
         queryFn: ({ queryKey }) => articleService.getData({ token: queryKey[2] }),
-        staleTime: Infinity
+        
+        staleTime: Infinity,
+        enabled: token !== ''
     })
 
     useEffect(() => {

@@ -14,8 +14,8 @@ export const useSectionData = ({ token, article_id }: SectionInfo['articleId']) 
             article_id: queryKey[3]
         }),
 
-        enabled: article_id !== '',
-        staleTime: Infinity
+        staleTime: Infinity,
+        enabled: token !== '' && article_id !== '',
     })
 
     const dataResult: ProcessedSection[] | [] = useMemo(() => {

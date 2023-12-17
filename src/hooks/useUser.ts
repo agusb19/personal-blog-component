@@ -38,7 +38,9 @@ export const useUserData = ({ token }: UseUserData) => {
     const { data, isPending, isLoading, isError, refetch } = useQuery({
         queryKey: ['user', 'data', token],
         queryFn: ({ queryKey }) => userService.getData({ token: queryKey[2] }),
-        staleTime: Infinity
+        
+        staleTime: Infinity,
+        enabled: token !== ''
     })
 
     useEffect(() => {
