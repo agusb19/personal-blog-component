@@ -9,3 +9,10 @@ export const PATHS = {
 export const addPath = (pathname: string, url: string): string => {
     return `${url}${pathname}`
 }
+
+export const dateConfig: Intl.DateTimeFormatOptions = { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+}
