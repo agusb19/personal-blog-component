@@ -1,22 +1,16 @@
-import React, { useState, useEffect } from 'react'
-import { useArticleData } from '../../hooks/useArticle'
-import { useValidation } from '../../hooks/useUser'
+import React, { useContext } from 'react'
+import { GlobalContext } from '../../context/globalContext'
+import { useNavigate } from 'react-router-dom'
 import './BlogCards.css'
 
-type Props = {
-    api_key: string
-}
+export const BlogCards = () => {
 
-export const BlogCards = ({ api_key }: Props) => {
+    const navigate = useNavigate()
+    const { articleData } = useContext(GlobalContext)
 
-    const [token, updateToken] = useState<string>('')
-
-    const { signIn } = useValidation({ updateToken })
-    const { articleData } = useArticleData({ token })
-
-    useEffect(() => {
-        signIn({ api_key })
-    }, [signIn, api_key])
+    const selectArticle = (articleName: string) => {
+        navigate(`/blog-posts/${articleName.replace(/\s/g, "-")}`)
+    }
 
     return (
         <section className="cards-wrapper">
@@ -26,9 +20,12 @@ export const BlogCards = ({ api_key }: Props) => {
                     if(!elem.isPublish) return
 
                     return (
-                        <div key={index} className="card-grid-space">
+                        <div 
+                            key={index} 
+                            className="card-grid-space" 
+                            onClick={() => selectArticle(elem.title)}
+                        >
                             <a 
-                                href="#"
                                 className="card" 
                                 style={{ '--bg-img': `url(${elem.image})`} as React.CSSProperties}
                             >
@@ -38,7 +35,7 @@ export const BlogCards = ({ api_key }: Props) => {
                                     <div className="date">{elem.date}</div>
                                     <div className="tags">
                                         {elem.keywords.map(keys => (
-                                            <div className="tag">{keys}</div>
+                                            <div className="tag" key={keys}>{keys}</div>
                                         ))}
                                     </div>
                                 </div>
