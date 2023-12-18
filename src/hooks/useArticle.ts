@@ -2,6 +2,7 @@ import { Article } from '../services/articles'
 import { useMemo, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { dateConfig } from '../utils/config'
+import { type ProcessedArticle } from '../types/articles'
 
 const articleService = new Article()
 
@@ -19,14 +20,14 @@ export const useArticleData = ({ token }: UseArticleData) => {
         enabled: token !== ''
     })
 
-    const dataResult = useMemo(() => {
+    const dataResult: ProcessedArticle[] | [] = useMemo(() => {
         return data?.success ? data.result.data.map(elem => {
 
             const dateConverted = new Date(elem.updated_at)
             const dateNormalized = dateConverted.toLocaleDateString('en-US', dateConfig)
 
             return {
-                id: elem.id,
+                id: elem.id.toString(),
                 title: elem.title,
                 image: elem.image,
                 description: elem.description,

@@ -1,5 +1,15 @@
 import { type APIResponse } from "./api"
 
+export type ProcessedArticle = {
+    id: string
+    title: string
+    image: string | null
+    description: string
+    keywords: string[]
+    isPublish: boolean
+    date: string
+}
+
 export type ArticleInfo = {
     token: {
         token: string
